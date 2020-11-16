@@ -121,6 +121,20 @@ is in the nums array, and -1 if it is not found.
 *******************************************************************/
 
 const recurBSearchIdx = (nums, targetNum) => {
+  if (nums.length === 0) return -1;
+  let middle = nums[Math.floor(nums.length/2)]
+  let right = nums.slice(Math.floor(nums.length/2 + 1))
+  let left = nums.slice(0, Math.floor(nums.length/2))
+
+  if (targetNum == middle) return Math.ceil(nums.length/2);
+
+  if (targetNum < middle) {
+    return recurBSearchIdx(left, targetNum)
+  } else if (targetNum > middle){
+    return recurBSearchIdx(right, targetNum)
+  }
+  
+
   // this implementation is identical to version 1, except rather than
   // returning true/false, return the index where you found the item
   // (instead of true) or -1 (instead of false).
