@@ -15,6 +15,21 @@ targetNum is within the nums array.
 *******************************************************************/
 
 const recurBSearch = (nums, targetNum) => {
+  if (nums.length === 0) return false;
+
+  let middle = nums[Math.floor(nums.length/2)]
+  let right = nums.slice(Math.floor(nums.length/2 + 1))
+  let left = nums.slice(0, Math.floor(nums.length/2))
+
+  if (targetNum == middle) return true;
+
+  if (targetNum < middle) {
+    return recurBSearch(left, targetNum)
+  } else if (targetNum > middle){
+    return recurBSearch(right, targetNum)
+  }
+  return false
+
   // if nums has no length, return false because we've run out of items to
   // search and haven't found targetNum
 
@@ -31,7 +46,24 @@ const recurBSearch = (nums, targetNum) => {
   // if it's not greater than or less than, we know it's equal so return true
 }
 
+const oddNums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const evenNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+// TEST CASES FOR BINARY SEARCH VERSION 1: Recursive Binary Search that returns
+// a Boolean Value indicating if targetNum is within the nums array.
+// TESTS WITH ODD NUMBER OF ELEMENTS
+console.log("PROBLEM 1 RESULTS:")
+console.log("ODD NUMBER OF ELEMENTS")
+console.log("Your Result: " + recurBSearch(oddNums, 0));
+console.log("Your Result: " + recurBSearch(oddNums, 2));
+console.log("Your Result: " + recurBSearch(oddNums, 5));
+console.log("Your Result: " + recurBSearch(oddNums, 7));
+console.log("Your Result: " + recurBSearch(oddNums, 10));
+console.log("Your Result: " + recurBSearch(evenNums, 0));
+console.log("Your Result: " + recurBSearch(evenNums, 2));
+console.log("Your Result: " + recurBSearch(evenNums, 5));
+console.log("Your Result: " + recurBSearch(evenNums, 7));
+console.log("Your Result: " + recurBSearch(evenNums, 10));
 /*******************************************************************
 BINARY SEARCH VERSION 2:
 
@@ -46,20 +78,20 @@ const iterBSearch = (nums, targetNum) => {
   // while the lowerIdx is less than or equal to the upperIdx, there are still
   // values to be searched
 
-  // reassign the midIdx to the the middle of the new lower and upper indices 
+  // reassign the midIdx to the the middle of the new lower and upper indices
 
   // if targetNum is larger than the value in the middle, we know targetNum is
   // not between the current lower and current middle, so raise the lowerIdx
   // value
 
   // if targetNum is less than the value in the middle, we know targetNum is not
-  // between the current upper and current middle, so lower the upperIdx 
+  // between the current upper and current middle, so lower the upperIdx
 
   // if it's not greater than or less than, we have found our target at the
   // midIdx and can return true and stop iterating.
 
   // if we finish iterating and haven't returned true, we've looked over the
-  // entire array and didn't find targetNum, so return false 
+  // entire array and didn't find targetNum, so return false
 }
 
 
@@ -95,10 +127,10 @@ const recurBSearchIdxV2 = (nums, targetNum, low = null, hi = null) => {
   length is 0, this implementation passes in low and hi indices to determine
   what part of the original array is being searched.
 
-  Base Case: 
+  Base Case:
   if low is equal to high and we haven't found targetNum, then return -1 to
   indicate that the value was not found
-  
+
   Determine the slice point (the middle of lower and upper)
 
   If targetNum is less than nums[slicepoint], then
