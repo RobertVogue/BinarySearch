@@ -119,21 +119,33 @@ BINARY SEARCH VERSION 3:
 Write a Recursive Binary Search that returns the Index value of targetNum if it
 is in the nums array, and -1 if it is not found.
 *******************************************************************/
+// const evenNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+// [7, 8, 9, 10]
+// original index = 6
+// current index = 0
+// middle was 5
 
 const recurBSearchIdx = (nums, targetNum) => {
   if (nums.length === 0) return -1;
-  let middle = nums[Math.floor(nums.length/2)]
-  let right = nums.slice(Math.floor(nums.length/2 + 1))
-  let left = nums.slice(0, Math.floor(nums.length/2))
+  let middleInd = Math.floor(nums.length/2)
+  let middle = nums[middleInd]
+  let right = nums.slice(middleInd + 1)
+  let left = nums.slice(0, middleInd)
 
-  if (targetNum == middle) return Math.ceil(nums.length/2);
+  // if (targetNum == middle) return Math.ceil(nums.length/2);
 
   if (targetNum < middle) {
     return recurBSearchIdx(left, targetNum)
-  } else if (targetNum > middle){
-    return recurBSearchIdx(right, targetNum)
+  } else if(targetNum > middle) {
+    let currInd = recurBSearchIdx(right, targetNum)
+    if (currInd == -1) return -1
+    return currInd + middleInd + 1
+  } else {
+    return middleInd
   }
-  
+
+
+
 
   // this implementation is identical to version 1, except rather than
   // returning true/false, return the index where you found the item
