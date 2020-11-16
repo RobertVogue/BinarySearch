@@ -74,6 +74,24 @@ targetNum is within the nums array.
 const iterBSearch = (nums, targetNum) => {
   // Save references to the beginning, middle, and end of the array into
   // variables: lowerIdx, midIdx, and upperIdx
+  if ( nums.length === 0) return false
+
+  let middle = nums[Math.floor(nums.length/2)]
+  let right = nums.slice(Math.floor(nums.length/2 + 1))
+  let left = nums.slice(0, Math.floor(nums.length/2))
+
+  for ( let i = 0; i < right.length; i++ ) {
+    let el = right[i]
+    if ( el == targetNum ) return true
+  }
+  for ( let i = 0; i < left.length; i++ ) {
+    let el = left[i]
+    if ( el == targetNum ) return true
+  }
+
+  if (targetNum == middle) return true
+  return false
+
 
   // while the lowerIdx is less than or equal to the upperIdx, there are still
   // values to be searched
