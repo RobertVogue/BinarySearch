@@ -187,6 +187,39 @@ const recurBSearchIdxV2 = (nums, targetNum, low = null, hi = null) => {
 
   If neither of those is true, return the slice point
   */
+  if (nums.length == 0) return -1;
+
+  let middleInd = Math.floor(nums.length/2)
+  let middle = nums[middleInd]
+  let right = nums.slice(middleInd + 1)
+  let left = nums.slice(0, middleInd)
+
+  // if ( targetNums < middle) {
+    //left array
+    // low = nums[0]
+    // hi = middleInd
+    // recurBSearchIdxV2(nums, targetNum, low, hi)
+
+  // } else {
+    // low = middleInd + 1
+    // hi = nums[nums.length-1]
+    // recurBSearchIdxV2(nums, targetNum, low, hi)
+
+  }
+
+
+  if (targetNum < middle) {
+    return recurBSearchIdxV2(left, targetNum, nums[0], left[left.length-1])
+  } else if(targetNum > middle) {
+    let currInd = recurBSearchIdxV2(right, targetNum, right[0], right[right.length-1])
+    if (currInd == -1) return -1
+    return currInd + middleInd + 1
+  } else {
+    return middleInd
+
+
+
+}
 }
 
 
